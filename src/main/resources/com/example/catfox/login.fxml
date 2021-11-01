@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #ECECE7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="520.0" style="-fx-background-color: #ECECE7;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.catfox.LoginController">
    <left>
       <AnchorPane prefHeight="407.0" prefWidth="225.0" style="-fx-background-color: #dc9afe;" BorderPane.alignment="CENTER">
          <children>
@@ -44,7 +44,7 @@
             </Label>
             <PasswordField fx:id="enterPasswordField" layoutX="96.0" layoutY="175.0" prefHeight="26.0" prefWidth="173.0" promptText="Password" />
             <Button fx:id="loginButton" layoutX="24.0" layoutY="259.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #ff6da6;" text="Login" />
-            <Button fx:id="cancelButton" layoutX="24.0" layoutY="311.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #ff6da6;" text="Cancel" />
+            <Button fx:id="cancelButton" layoutX="24.0" layoutY="311.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #ff6da6;" text="Cancel" />
             <Label alignment="CENTER" layoutX="25.0" layoutY="224.0" prefHeight="19.0" prefWidth="242.0" text="Invalid login. Please try again." textFill="#e81313">
                <font>
                   <Font size="13.0" />
