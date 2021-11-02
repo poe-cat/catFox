@@ -2,7 +2,10 @@ package com.example.catfox;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -10,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.File;
 import java.net.URL;
@@ -77,12 +81,29 @@ public class LoginController implements Initializable {
 
             while(queryResult.next()) {
                 if(queryResult.getInt(1) == 1) {
-                    loginMessageLabel.setText("Congrats!");
+                    //loginMessageLabel.setText("Congrats!");
+                    createAccountForm();
                 } else {
                     loginMessageLabel.setText("Invalid login. Please try again");
                 }
             }
 
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+    public void createAccountForm() {
+
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
+            Stage registerStage = new Stage();
+            registerStage.initStyle(StageStyle.UNDECORATED);
+            Scene scene = new Scene(root,504, 565);
+            registerStage.setScene(scene);
+            registerStage.show();
 
         } catch(Exception e) {
             e.printStackTrace();
