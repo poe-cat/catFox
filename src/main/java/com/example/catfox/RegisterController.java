@@ -42,7 +42,7 @@ public class RegisterController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        File catFile = new File("src/main/resources/com/example/catfox/images/cat.png");
+        File catFile = new File("src/main/resources/com/example/catfox/images/horn.png");
         Image catImage = new Image(catFile.toURI().toString());
         catImageView.setImage(catImage);
     }

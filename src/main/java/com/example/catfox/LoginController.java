@@ -46,7 +46,7 @@ public class LoginController implements Initializable {
         Image brandingImage = new Image(brandingFile.toURI().toString());
         brandingImageView.setImage(brandingImage);
 
-        File lockFile = new File("src/main/resources/com/example/catfox/images/heart.png");
+        File lockFile = new File("src/main/resources/com/example/catfox/images/koya.png");
         Image lockImage = new Image(lockFile.toURI().toString());
         lockImageView.setImage(lockImage);
     }
