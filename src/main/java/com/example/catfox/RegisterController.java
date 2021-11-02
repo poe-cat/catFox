@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class RegisterController implements Initializable {
@@ -31,6 +32,12 @@ public class RegisterController implements Initializable {
     private PasswordField confirmpasswordField;
     @FXML
     private Label confirmPasswordLabel;
+    @FXML
+    private TextField firstNameTextField;
+    @FXML
+    private TextField lastNameTextField;
+    @FXML
+    private TextField usernameTextField;
 
 
     @Override
@@ -45,7 +52,7 @@ public class RegisterController implements Initializable {
         if(setpasswordField.getText().equals(confirmpasswordField.getText())) {
             registerUser();
             confirmPasswordLabel.setText("");
-            registrationMessageLabel.setText("User registered successfully!");
+
         } else {
             confirmPasswordLabel.setText("Password doesn't match!");
         }
@@ -63,6 +70,25 @@ public class RegisterController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 
+        String firstname = firstNameTextField.getText();
+        String lastname = lastNameTextField.getText();
+        String username = usernameTextField.getText();
+        String password = setpasswordField.getText();
+
+        String insertFields = "INSERT INTO demo_db.useraccount (firstname, lastname, username, password) VALUES ('";
+        String insertValues = firstname + "','" + lastname + "','" + username + "','" + password + "')";
+        String insertToRegister = insertFields + insertValues;
+
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(insertToRegister);
+            registrationMessageLabel.setText("User registered successfully!");
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
 
 
     }
