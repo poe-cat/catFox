@@ -1,5 +1,6 @@
 package com.example.catfox;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
 public class RegisterController implements Initializable {
@@ -39,23 +41,29 @@ public class RegisterController implements Initializable {
     }
 
     public void registerButtonOnAction(ActionEvent event) {
-        registrationMessageLabel.setText("User registered successfully!");
-        registerUser();
+
+        if(setpasswordField.getText().equals(confirmpasswordField.getText())) {
+            registerUser();
+            confirmPasswordLabel.setText("");
+            registrationMessageLabel.setText("User registered successfully!");
+        } else {
+            confirmPasswordLabel.setText("Password doesn't match!");
+        }
     }
 
 
     public void closeButtonOnAction(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
+        Platform.exit();
     }
 
     public void registerUser() {
 
-        if(setpasswordField.getText().equals(confirmpasswordField.getText())) {
-            confirmPasswordLabel.setText("You are set!");
-        } else {
-            confirmPasswordLabel.setText("Password doesn't match!");
-        }
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+
+
 
     }
 }
