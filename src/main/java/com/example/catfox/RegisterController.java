@@ -27,6 +27,11 @@ public class RegisterController implements Initializable {
         catImageView.setImage(catImage);
     }
 
+    public void registerButtonOnAction(ActionEvent event) {
+
+    }
+
+
     public void closeButtonOnAction(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();

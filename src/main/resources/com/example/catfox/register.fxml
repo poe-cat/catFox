@@ -19,7 +19,7 @@
                   <Image url="@images/cat.png" />
                </image>
             </ImageView>
-            <Label layoutX="130.0" layoutY="21.0" text="User Registration" textFill="#fcfbff">
+            <Label layoutX="126.0" layoutY="28.0" text="User Registration" textFill="#fcfbff">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -66,5 +66,15 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
+      <Label fx:id="registrationMessageLabel" alignment="CENTER" layoutX="4.0" layoutY="98.0" prefHeight="17.0" prefWidth="512.0" text="User registered successfully!" textFill="#572263">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="confirmPasswordLabel" alignment="CENTER" layoutX="289.0" layoutY="355.0" prefHeight="19.0" prefWidth="147.0" text="password doesn't match" textFill="#e8170c">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
