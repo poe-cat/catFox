@@ -61,7 +61,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button fx:id="closeButton" layoutX="100.0" layoutY="485.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="336.0" style="-fx-background-color: #dc9afe;" text="Close" textFill="WHITE">
+      <Button fx:id="closeButton" layoutX="100.0" layoutY="485.0" mnemonicParsing="false" onAction="#closeButtonOnAction" prefHeight="27.0" prefWidth="336.0" style="-fx-background-color: #dc9afe;" text="Close" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
