@@ -44,7 +44,7 @@
             <PasswordField fx:id="enterPasswordField" layoutX="96.0" layoutY="175.0" prefHeight="26.0" prefWidth="173.0" promptText="Password" />
             <Button fx:id="loginButton" layoutX="24.0" layoutY="259.0" mnemonicParsing="false" onAction="#loginButtonOnAction" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #ff6da6;" text="Login" />
             <Button fx:id="cancelButton" layoutX="24.0" layoutY="311.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="32.0" prefWidth="240.0" style="-fx-background-color: #ff6da6;" text="Cancel" />
-            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="25.0" layoutY="224.0" prefHeight="19.0" prefWidth="242.0" text="Invalid login. Please try again." textFill="#e81313">
+            <Label fx:id="loginMessageLabel" alignment="CENTER" layoutX="25.0" layoutY="224.0" prefHeight="19.0" prefWidth="242.0" textFill="#e81313">
                <font>
                   <Font size="13.0" />
                </font>
