@@ -27,7 +27,7 @@
          <children>
             <ImageView fx:id="lockImageView" fitHeight="60.0" fitWidth="60.0" layoutX="119.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@images/heart.png" />
+                  <Image url="@images/koya.png" />
                </image>
             </ImageView>
             <Label layoutX="24.0" layoutY="139.0" text="Username">
