@@ -10,11 +10,11 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="565.0" prefWidth="520.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.catfox.RegisterController">
+<AnchorPane prefHeight="565.0" prefWidth="504.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.catfox.RegisterController">
    <children>
       <AnchorPane prefHeight="82.0" prefWidth="520.0" style="-fx-background-color: #ff6da6;">
          <children>
-            <ImageView fitHeight="64.0" fitWidth="75.0" layoutX="34.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="catImageView" fitHeight="64.0" fitWidth="75.0" layoutX="34.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@images/cat.png" />
                </image>
@@ -31,37 +31,37 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="100.0" layoutY="142.0" prefHeight="25.0" prefWidth="336.0" promptText="first name" />
+      <TextField fx:id="firstNameTextField" layoutX="100.0" layoutY="142.0" prefHeight="25.0" prefWidth="336.0" promptText="first name" />
       <Label layoutX="100.0" layoutY="181.0" text="Last Name">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="100.0" layoutY="200.0" prefHeight="25.0" prefWidth="336.0" promptText="last name" />
+      <TextField fx:id="lastNameTextField" layoutX="100.0" layoutY="200.0" prefHeight="25.0" prefWidth="336.0" promptText="last name" />
       <Label layoutX="100.0" layoutY="240.0" text="Username">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField layoutX="100.0" layoutY="259.0" prefHeight="25.0" prefWidth="336.0" promptText="username" />
+      <TextField fx:id="usernameTextField" layoutX="100.0" layoutY="259.0" prefHeight="25.0" prefWidth="336.0" promptText="username" />
       <Label layoutX="100.0" layoutY="296.0" text="Password">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <PasswordField layoutX="100.0" layoutY="315.0" prefHeight="25.0" prefWidth="336.0" promptText="password" />
+      <PasswordField fx:id="setpasswordField" layoutX="100.0" layoutY="315.0" prefHeight="25.0" prefWidth="336.0" promptText="password" />
       <Label layoutX="100.0" layoutY="355.0" text="Confirm Password">
          <font>
             <Font size="13.0" />
          </font>
       </Label>
-      <PasswordField layoutX="100.0" layoutY="374.0" prefHeight="25.0" prefWidth="336.0" promptText="confirm password" />
-      <Button layoutX="100.0" layoutY="436.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="336.0" style="-fx-background-color: #dc9afe;" text="Register" textFill="WHITE">
+      <PasswordField fx:id="confirmpasswordField" layoutX="100.0" layoutY="374.0" prefHeight="25.0" prefWidth="336.0" promptText="confirm password" />
+      <Button fx:id="registerButton" layoutX="100.0" layoutY="436.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="336.0" style="-fx-background-color: #dc9afe;" text="Register" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Button>
-      <Button layoutX="100.0" layoutY="485.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="336.0" style="-fx-background-color: #dc9afe;" text="Close" textFill="WHITE">
+      <Button fx:id="closeButton" layoutX="100.0" layoutY="485.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="336.0" style="-fx-background-color: #dc9afe;" text="Close" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
