@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -61,7 +64,30 @@ public class LoginController implements Initializable {
     }
 
     public void validateLogin() {
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
 
+        String verifyLogin = "SELECT count(1) FROM useraccount WHERE username = '" + usernameTextField.getText()
+                + "'AND password = '" + enterPasswordField.getText() + "'";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryResult = statement.executeQuery(verifyLogin);
+
+
+            while(queryResult.next()) {
+                if(queryResult.getInt(1) == 1) {
+                    loginMessageLabel.setText("Congrats!");
+                } else {
+                    loginMessageLabel.setText("Invalid login. Please try again");
+                }
+            }
+
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
     }
 
 }
