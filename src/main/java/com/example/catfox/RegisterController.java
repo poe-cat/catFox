@@ -1,17 +1,26 @@
 package com.example.catfox;
 
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
@@ -40,13 +49,19 @@ public class RegisterController implements Initializable {
     //TODO
     private TableView tableData;
 
+    private ObservableList<ObservableList> data;
+    String SQL = "SELECT * from demo_db.useraccount";
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         File catFile = new File("src/main/resources/com/example/catfox/images/horn.png");
         Image catImage = new Image(catFile.toURI().toString());
         catImageView.setImage(catImage);
+        fetColumnList();
+        fetRowList();
     }
+
 
     public void registerButtonOnAction(ActionEvent event) {
 
@@ -57,6 +72,20 @@ public class RegisterController implements Initializable {
         } else {
             confirmPasswordLabel.setText("Password doesn't match!");
         }
+
+        if (firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty()
+                || usernameTextField.getText().isEmpty() || setpasswordField.getText().isEmpty()
+                || confirmpasswordField.getText().isEmpty()) {
+
+            registrationMessageLabel.setTextFill(Color.TOMATO);
+            registrationMessageLabel.setText("Enter all details");
+
+        } else {
+            registerUser();
+        }
+
+
+
     }
 
 
@@ -85,6 +114,7 @@ public class RegisterController implements Initializable {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(insertToRegister);
             registrationMessageLabel.setText("User registered successfully!");
+            fetRowList();
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -93,4 +123,66 @@ public class RegisterController implements Initializable {
 
 
     }
+
+    private void fetColumnList() {
+
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+
+        try {
+            ResultSet rs = connectDB.createStatement().executeQuery(SQL);
+
+            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+
+                final int j = i;
+
+                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1).toUpperCase());
+
+                col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>,
+                        ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
+
+                tableData.getColumns().removeAll(col);
+                tableData.getColumns().addAll(col);
+
+                System.out.println("Column [" + i + "] ");
+
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error " + e.getMessage());
+        }
+    }
+
+    private void fetRowList() {
+
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+
+        data = FXCollections.observableArrayList();
+        ResultSet rs;
+
+        try {
+            rs = connectDB.createStatement().executeQuery(SQL);
+
+            while (rs.next()) {
+                //iterate row
+                ObservableList row = FXCollections.observableArrayList();
+
+                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+                    //iterate column
+                    row.add(rs.getString(i));
+                }
+
+                System.out.println("Row [1] added " + row);
+                data.add(row);
+            }
+            tableData.setItems(data);
+
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
 }
+
+
+
