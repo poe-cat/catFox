@@ -46,7 +46,6 @@ public class RegisterController implements Initializable {
     private TextField usernameTextField;
 
     @FXML
-    //TODO
     private TableView tableData;
 
     private ObservableList<ObservableList> data;
@@ -65,6 +64,7 @@ public class RegisterController implements Initializable {
 
     public void registerButtonOnAction(ActionEvent event) {
 
+        //check if both passwords are the same
         if(setpasswordField.getText().equals(confirmpasswordField.getText())) {
             registerUser();
             confirmPasswordLabel.setText("");
@@ -73,6 +73,7 @@ public class RegisterController implements Initializable {
             confirmPasswordLabel.setText("Password doesn't match!");
         }
 
+        //check if not empty
         if (firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty()
                 || usernameTextField.getText().isEmpty() || setpasswordField.getText().isEmpty()
                 || confirmpasswordField.getText().isEmpty()) {
@@ -83,9 +84,6 @@ public class RegisterController implements Initializable {
         } else {
             registerUser();
         }
-
-
-
     }
 
 
@@ -113,6 +111,7 @@ public class RegisterController implements Initializable {
         try {
             Statement statement = connectDB.createStatement();
             statement.executeUpdate(insertToRegister);
+            registrationMessageLabel.setTextFill(Color.GREEN);
             registrationMessageLabel.setText("User registered successfully!");
             fetRowList();
 
@@ -120,8 +119,6 @@ public class RegisterController implements Initializable {
             e.printStackTrace();
             e.getCause();
         }
-
-
     }
 
     private void fetColumnList() {
