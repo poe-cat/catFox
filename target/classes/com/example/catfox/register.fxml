@@ -5,6 +5,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.ImageInput?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -81,5 +82,16 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
+      <Button fx:id="deleteButton" blendMode="SRC_ATOP" layoutX="1134.0" layoutY="29.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="37.0">
+         <effect>
+            <ImageInput>
+               <source>
+                  <Image url="file:/D:/PROJEKTY/catFox/src/main/resources/com/example/catfox/images/thrash.png" />
+               </source>
+            </ImageInput>
+         </effect>
+      </Button>
+      <Label fx:id="searchLabel" layoutX="538.0" layoutY="40.0" text="Search" />
+      <TextField fx:id="searchTextField" layoutX="585.0" layoutY="36.0" prefHeight="25.0" prefWidth="336.0" promptText="Keywords..." />
    </children>
 </AnchorPane>
