@@ -58,6 +58,8 @@ public class RegisterController implements Initializable {
 
     @FXML
     private TableView tableData;
+
+    //TODO
     @FXML
     private TableColumn idTableColumn, firstnameTableColumn, lastnameTableColumn, usernameTableColumn, passwordTableColumn;
 
@@ -160,16 +162,6 @@ public class RegisterController implements Initializable {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
     private void fetColumnList() {
 
         DatabaseConnection connectNow = new DatabaseConnection();
@@ -228,13 +220,6 @@ public class RegisterController implements Initializable {
             System.err.println(ex.getMessage());
         }
     }
-
-
-//    public void deleteButtonOnAction(ActionEvent event) {
-//        //TODO
-//    }
-
-
 }
 
 
