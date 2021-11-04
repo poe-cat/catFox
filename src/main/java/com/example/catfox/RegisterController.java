@@ -23,6 +23,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegisterController implements Initializable {
 
@@ -183,6 +185,13 @@ public class RegisterController implements Initializable {
             System.err.println(ex.getMessage());
         }
     }
+
+
+    public void deleteButtonOnAction(ActionEvent event) {
+        //TODO
+    }
+
+
 }
 
 
