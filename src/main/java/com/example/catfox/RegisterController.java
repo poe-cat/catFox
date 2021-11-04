@@ -32,8 +32,10 @@ public class RegisterController implements Initializable {
     private ImageView catImageView;
     @FXML
     private Button closeButton;
+
     @FXML
     private Button deleteButton;
+
     @FXML
     private Label registrationMessageLabel;
     @FXML
@@ -50,7 +52,14 @@ public class RegisterController implements Initializable {
     private TextField usernameTextField;
 
     @FXML
+    private Label searchLabel;
+    @FXML
+    private TextField searchTextField;
+
+    @FXML
     private TableView tableData;
+    @FXML
+    private TableColumn idTableColumn, firstnameTableColumn, lastnameTableColumn, usernameTableColumn, passwordTableColumn;
 
     private ObservableList<ObservableList> data;
     String SQL = "SELECT * from demo_db.useraccount";
