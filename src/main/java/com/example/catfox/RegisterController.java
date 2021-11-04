@@ -101,6 +101,10 @@ public class RegisterController implements Initializable {
         }
     }
 
+    public void deleteButtonOnAction(ActionEvent event) {
+        deleteUser();
+    }
+
 
     public void closeButtonOnAction(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -135,6 +139,36 @@ public class RegisterController implements Initializable {
             e.getCause();
         }
     }
+
+    public void deleteUser() {
+
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+
+        String insertFields = "DELETE FROM demo_db.useraccount WHERE username='ffsd'";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            statement.executeUpdate(insertFields);
+            registrationMessageLabel.setTextFill(Color.GREEN);
+            registrationMessageLabel.setText("User deleted successfully!");
+            fetRowList();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+            e.getCause();
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 
     private void fetColumnList() {
 
@@ -196,9 +230,9 @@ public class RegisterController implements Initializable {
     }
 
 
-    public void deleteButtonOnAction(ActionEvent event) {
-        //TODO
-    }
+//    public void deleteButtonOnAction(ActionEvent event) {
+//        //TODO
+//    }
 
 
 }
