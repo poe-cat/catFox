@@ -31,6 +31,8 @@ public class RegisterController implements Initializable {
     @FXML
     private Button closeButton;
     @FXML
+    private Button deleteButton;
+    @FXML
     private Label registrationMessageLabel;
     @FXML
     private PasswordField setpasswordField;
@@ -59,6 +61,8 @@ public class RegisterController implements Initializable {
         catImageView.setImage(catImage);
         fetColumnList();
         fetRowList();
+
+        tableData.setEditable(true);
     }
 
 
