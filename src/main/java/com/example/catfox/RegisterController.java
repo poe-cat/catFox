@@ -191,9 +191,16 @@ public class RegisterController implements Initializable {
 
 
     public void closeButtonOnAction(ActionEvent event) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
-        Platform.exit();
+        Alert alert = new Alert (Alert.AlertType.CONFIRMATION,"", ButtonType.YES, ButtonType.NO);
+        alert.setHeaderText("Are you sure you want to quit?");
+        alert.showAndWait();
+
+        if(alert.getResult() == ButtonType.YES) {
+            Stage stage = (Stage) closeButton.getScene().getWindow();
+            stage.close();
+            Platform.exit();
+        }
+        else alert.close();
     }
 
     public void registerUser() {
