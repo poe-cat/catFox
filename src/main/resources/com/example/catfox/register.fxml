@@ -93,7 +93,7 @@
          <effect>
             <ImageInput>
                <source>
-                  <Image url="file:/D:/PROJEKTY/catFox/src/main/resources/com/example/catfox/images/thrash.png" />
+                  <Image url="@images/thrash.png" />
                </source>
             </ImageInput>
          </effect>
