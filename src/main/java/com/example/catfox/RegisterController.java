@@ -124,7 +124,6 @@ public class RegisterController implements Initializable {
         tableData.setEditable(true);
     }
 
-
     public void registerButtonOnAction(ActionEvent event) {
 
         //check if both passwords are the same
@@ -148,9 +147,14 @@ public class RegisterController implements Initializable {
             registerUser();
         }
     }
-
+//TODO
     public void deleteButtonOnAction(ActionEvent event) {
-        deleteUser();
+        deleteButton.setOnAction(e -> {
+            Person selectedItem = tableData.getSelectionModel().getSelectedItem();
+            tableData.getItems().remove(selectedItem);
+            deleteUser();
+            refreshTable();
+        });
     }
 
 
@@ -194,7 +198,7 @@ public class RegisterController implements Initializable {
         DatabaseConnection connectNow = new DatabaseConnection();
         connection = connectNow.getConnection();
 
-        String insertFields = "DELETE FROM demo_db.useraccount WHERE username='kupka'";
+        String insertFields = "DELETE FROM demo_db.useraccount WHERE username=''";
 
         try {
             Statement statement = connection.createStatement();
