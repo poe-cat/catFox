@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -83,6 +85,7 @@ public class RegisterController implements Initializable {
         File catFile = new File("src/main/resources/com/example/catfox/images/horn.png");
         Image catImage = new Image(catFile.toURI().toString());
         catImageView.setImage(catImage);
+        tableData.setEditable(true);
 
         DatabaseConnection connectNow = new DatabaseConnection();
         connection = connectNow.getConnection();
@@ -112,17 +115,47 @@ public class RegisterController implements Initializable {
 
             tableData.setItems(personObservableList);
 
+            //for searching database by keywords
+            FilteredList<Person> filteredList =
+                    new FilteredList<>(personObservableList, b -> true);
+
+
+            searchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredList.setPredicate(person -> {
+
+                    if(newValue.isEmpty() || newValue.isBlank() || newValue == null) {
+                        return true;
+                    }
+
+                    String searchKeyword = newValue.toLowerCase();
+
+                    if(person.getFirstname().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;
+                    } else if(person.getLastname().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;
+                    }else if(person.getUsername().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;
+                    } else if(person.getPassword().toLowerCase().indexOf(searchKeyword) > -1) {
+                        return true;
+                    } else
+                        return false;
+
+                });
+            });
+
+            SortedList<Person> sortedList = new SortedList<>(filteredList);
+
+            sortedList.comparatorProperty().bind(tableData.comparatorProperty());
+
+            tableData.setItems(sortedList);
+
+
         } catch(SQLException e) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, e);
             e.printStackTrace();
         }
-
-
-//        fetColumnList();
-//        fetRowList();
-
-        tableData.setEditable(true);
     }
+
 
     public void registerButtonOnAction(ActionEvent event) {
 
