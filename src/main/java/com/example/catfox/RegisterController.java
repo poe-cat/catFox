@@ -19,15 +19,18 @@ import javafx.util.Callback;
 
 import java.io.File;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RegisterController implements Initializable {
+
+    String query = null;
+    Connection connection = null ;
+    PreparedStatement preparedStatement = null ;
+    ResultSet resultSet = null ;
+    Person person = null ;
 
     @FXML
     private ImageView catImageView;
@@ -82,12 +85,12 @@ public class RegisterController implements Initializable {
         catImageView.setImage(catImage);
 
         DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getConnection();
+        connection = connectNow.getConnection();
 
         String personViewQuery = "SELECT firstname, lastname, username, password FROM demo_db.useraccount";
 
         try {
-            Statement statement = connectDB.createStatement();
+            Statement statement = connection.createStatement();
             ResultSet queryOutput = statement.executeQuery(personViewQuery);
 
             while(queryOutput.next()) {
@@ -178,6 +181,7 @@ public class RegisterController implements Initializable {
             registrationMessageLabel.setTextFill(Color.GREEN);
             registrationMessageLabel.setText("User registered successfully!");
             //fetRowList();
+            refreshTable();
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -188,12 +192,12 @@ public class RegisterController implements Initializable {
     public void deleteUser() {
 
         DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getConnection();
+        connection = connectNow.getConnection();
 
-        String insertFields = "DELETE FROM demo_db.useraccount WHERE username='ffsd'";
+        String insertFields = "DELETE FROM demo_db.useraccount WHERE username='kupka'";
 
         try {
-            Statement statement = connectDB.createStatement();
+            Statement statement = connection.createStatement();
             statement.executeUpdate(insertFields);
             registrationMessageLabel.setTextFill(Color.GREEN);
             registrationMessageLabel.setText("User deleted successfully!");
@@ -267,11 +271,26 @@ public class RegisterController implements Initializable {
 
     @FXML
     private void refreshTable() {
+        try {
+            personObservableList.clear();
 
+            query = "SELECT * FROM `useraccount`";
+            preparedStatement = connection.prepareStatement(query);
+            resultSet = preparedStatement.executeQuery();
 
+            while (resultSet.next()){
+                personObservableList.add(new Person(
+                        resultSet.getString("firstname"),
+                        resultSet.getString("lastname"),
+                        resultSet.getString("username"),
+                        resultSet.getString("password")));
+                tableData.setItems(personObservableList);
 
+            }
 
-
+        } catch (SQLException ex) {
+            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 
