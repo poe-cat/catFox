@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -75,9 +76,45 @@ public class RegisterController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
         File catFile = new File("src/main/resources/com/example/catfox/images/horn.png");
         Image catImage = new Image(catFile.toURI().toString());
         catImageView.setImage(catImage);
+
+        DatabaseConnection connectNow = new DatabaseConnection();
+        Connection connectDB = connectNow.getConnection();
+
+        String personViewQuery = "SELECT firstname, lastname, username, password FROM demo_db.useraccount";
+
+        try {
+            Statement statement = connectDB.createStatement();
+            ResultSet queryOutput = statement.executeQuery(personViewQuery);
+
+            while(queryOutput.next()) {
+
+                String queryFirstname = queryOutput.getString("firstname");
+                String queryLastname = queryOutput.getString("lastname");
+                String queryUsername = queryOutput.getString("username");
+                String queryPassword = queryOutput.getString("password");
+
+                personObservableList.add(new Person(queryFirstname, queryLastname,
+                        queryUsername, queryPassword));
+
+            }
+
+            firstnameColumn.setCellValueFactory(new PropertyValueFactory<>("firstname"));
+            lastnameColumn.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+            usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
+            passwordColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
+
+            tableData.setItems(personObservableList);
+
+        } catch(SQLException e) {
+            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, e);
+            e.printStackTrace();
+        }
+
+
 //        fetColumnList();
 //        fetRowList();
 
@@ -228,10 +265,14 @@ public class RegisterController implements Initializable {
 //    }
 
 
+    @FXML
+    private void refreshTable() {
 
 
 
 
+
+    }
 }
 
 
