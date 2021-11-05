@@ -72,8 +72,8 @@ public class RegisterController implements Initializable {
         File catFile = new File("src/main/resources/com/example/catfox/images/horn.png");
         Image catImage = new Image(catFile.toURI().toString());
         catImageView.setImage(catImage);
-        fetColumnList();
-        fetRowList();
+//        fetColumnList();
+//        fetRowList();
 
         tableData.setEditable(true);
     }
@@ -134,7 +134,7 @@ public class RegisterController implements Initializable {
             statement.executeUpdate(insertToRegister);
             registrationMessageLabel.setTextFill(Color.GREEN);
             registrationMessageLabel.setText("User registered successfully!");
-            fetRowList();
+            //fetRowList();
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -154,7 +154,7 @@ public class RegisterController implements Initializable {
             statement.executeUpdate(insertFields);
             registrationMessageLabel.setTextFill(Color.GREEN);
             registrationMessageLabel.setText("User deleted successfully!");
-            fetRowList();
+            //fetRowList();
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -162,64 +162,64 @@ public class RegisterController implements Initializable {
         }
     }
 
-    private void fetColumnList() {
-
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getConnection();
-
-        try {
-            ResultSet rs = connectDB.createStatement().executeQuery(SQL);
-
-            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-
-                final int j = i;
-
-                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1).toUpperCase());
-
-                col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>,
-                        ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
-
-                tableData.getColumns().removeAll(col);
-                tableData.getColumns().addAll(col);
-
-                System.out.println("Column [" + i + "] ");
-
-            }
-
-        } catch (Exception e) {
-            System.out.println("Error " + e.getMessage());
-        }
-    }
-
-    private void fetRowList() {
-
-        DatabaseConnection connectNow = new DatabaseConnection();
-        Connection connectDB = connectNow.getConnection();
-
-        data = FXCollections.observableArrayList();
-        ResultSet rs;
-
-        try {
-            rs = connectDB.createStatement().executeQuery(SQL);
-
-            while (rs.next()) {
-                //iterate row
-                ObservableList row = FXCollections.observableArrayList();
-
-                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-                    //iterate column
-                    row.add(rs.getString(i));
-                }
-
-                System.out.println("Row [1] added " + row);
-                data.add(row);
-            }
-            tableData.setItems(data);
-
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
-        }
-    }
+//    private void fetColumnList() {
+//
+//        DatabaseConnection connectNow = new DatabaseConnection();
+//        Connection connectDB = connectNow.getConnection();
+//
+//        try {
+//            ResultSet rs = connectDB.createStatement().executeQuery(SQL);
+//
+//            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
+//
+//                final int j = i;
+//
+//                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1).toUpperCase());
+//
+//                col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>,
+//                        ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
+//
+//                tableData.getColumns().removeAll(col);
+//                tableData.getColumns().addAll(col);
+//
+//                System.out.println("Column [" + i + "] ");
+//
+//            }
+//
+//        } catch (Exception e) {
+//            System.out.println("Error " + e.getMessage());
+//        }
+//    }
+//
+//    private void fetRowList() {
+//
+//        DatabaseConnection connectNow = new DatabaseConnection();
+//        Connection connectDB = connectNow.getConnection();
+//
+//        data = FXCollections.observableArrayList();
+//        ResultSet rs;
+//
+//        try {
+//            rs = connectDB.createStatement().executeQuery(SQL);
+//
+//            while (rs.next()) {
+//                //iterate row
+//                ObservableList row = FXCollections.observableArrayList();
+//
+//                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+//                    //iterate column
+//                    row.add(rs.getString(i));
+//                }
+//
+//                System.out.println("Row [1] added " + row);
+//                data.add(row);
+//            }
+//            tableData.setItems(data);
+//
+//        } catch (SQLException ex) {
+//            System.err.println(ex.getMessage());
+//        }
+//    }
 }
 
 
