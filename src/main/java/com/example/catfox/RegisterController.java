@@ -182,12 +182,11 @@ public class RegisterController implements Initializable {
     }
 //TODO
     public void deleteButtonOnAction(ActionEvent event) {
-        deleteButton.setOnAction(e -> {
             Person selectedItem = tableData.getSelectionModel().getSelectedItem();
             tableData.getItems().remove(selectedItem);
             deleteUser();
             refreshTable();
-        });
+
     }
 
 
