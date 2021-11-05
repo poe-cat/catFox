@@ -57,13 +57,19 @@ public class RegisterController implements Initializable {
     private TextField searchTextField;
 
     @FXML
-    private TableView tableData;
+    private TableView<Person> tableData;
 
-    //TODO
     @FXML
-    private TableColumn idTableColumn, firstnameTableColumn, lastnameTableColumn, usernameTableColumn, passwordTableColumn;
+    private TableColumn <Person, String> firstnameColumn;
+    @FXML
+    private TableColumn <Person, String> lastnameColumn;
+    @FXML
+    private TableColumn <Person, String> usernameColumn;
+    @FXML
+    private TableColumn <Person, String> passwordColumn;
 
-    private ObservableList<ObservableList> data;
+
+    private ObservableList<Person> personObservableList = FXCollections.observableArrayList();
     String SQL = "SELECT * from demo_db.useraccount";
 
 
@@ -220,6 +226,12 @@ public class RegisterController implements Initializable {
 //            System.err.println(ex.getMessage());
 //        }
 //    }
+
+
+
+
+
+
 }
 
 
