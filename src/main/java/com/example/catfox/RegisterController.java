@@ -32,15 +32,11 @@ public class RegisterController implements Initializable {
     Connection connection = null ;
     PreparedStatement preparedStatement = null ;
     ResultSet resultSet = null ;
-    Person person = null ;
 
     @FXML
     private ImageView catImageView;
     @FXML
     private Button closeButton;
-
-    @FXML
-    private Button deleteButton;
 
     @FXML
     private Label registrationMessageLabel;
@@ -76,8 +72,6 @@ public class RegisterController implements Initializable {
 
 
     private ObservableList<Person> personObservableList = FXCollections.observableArrayList();
-    String SQL = "SELECT * from demo_db.useraccount";
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -180,15 +174,6 @@ public class RegisterController implements Initializable {
             registerUser();
         }
     }
-//TODO
-    public void deleteButtonOnAction(ActionEvent event) {
-            Person selectedItem = tableData.getSelectionModel().getSelectedItem();
-            tableData.getItems().remove(selectedItem);
-            deleteUser();
-            refreshTable();
-
-    }
-
 
     public void closeButtonOnAction(ActionEvent event) {
         Alert alert = new Alert (Alert.AlertType.CONFIRMATION,"", ButtonType.YES, ButtonType.NO);
@@ -223,7 +208,6 @@ public class RegisterController implements Initializable {
             statement.executeUpdate(insertToRegister);
             registrationMessageLabel.setTextFill(Color.GREEN);
             registrationMessageLabel.setText("User registered successfully!");
-            //fetRowList();
             refreshTable();
 
         } catch(Exception e) {
@@ -231,86 +215,6 @@ public class RegisterController implements Initializable {
             e.getCause();
         }
     }
-
-    public void deleteUser() {
-
-        DatabaseConnection connectNow = new DatabaseConnection();
-        connection = connectNow.getConnection();
-
-        String insertFields = "DELETE FROM demo_db.useraccount WHERE username=''";
-
-        try {
-            Statement statement = connection.createStatement();
-            statement.executeUpdate(insertFields);
-            registrationMessageLabel.setTextFill(Color.GREEN);
-            registrationMessageLabel.setText("User deleted successfully!");
-            //fetRowList();
-
-        } catch(Exception e) {
-            e.printStackTrace();
-            e.getCause();
-        }
-    }
-
-//    private void fetColumnList() {
-//
-//        DatabaseConnection connectNow = new DatabaseConnection();
-//        Connection connectDB = connectNow.getConnection();
-//
-//        try {
-//            ResultSet rs = connectDB.createStatement().executeQuery(SQL);
-//
-//            for (int i = 0; i < rs.getMetaData().getColumnCount(); i++) {
-//
-//                final int j = i;
-//
-//                TableColumn col = new TableColumn(rs.getMetaData().getColumnName(i + 1).toUpperCase());
-//
-//                col.setCellValueFactory((Callback<TableColumn.CellDataFeatures<ObservableList, String>,
-//                        ObservableValue<String>>) param -> new SimpleStringProperty(param.getValue().get(j).toString()));
-//
-//                tableData.getColumns().removeAll(col);
-//                tableData.getColumns().addAll(col);
-//
-//                System.out.println("Column [" + i + "] ");
-//
-//            }
-//
-//        } catch (Exception e) {
-//            System.out.println("Error " + e.getMessage());
-//        }
-//    }
-//
-//    private void fetRowList() {
-//
-//        DatabaseConnection connectNow = new DatabaseConnection();
-//        Connection connectDB = connectNow.getConnection();
-//
-//        data = FXCollections.observableArrayList();
-//        ResultSet rs;
-//
-//        try {
-//            rs = connectDB.createStatement().executeQuery(SQL);
-//
-//            while (rs.next()) {
-//                //iterate row
-//                ObservableList row = FXCollections.observableArrayList();
-//
-//                for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-//                    //iterate column
-//                    row.add(rs.getString(i));
-//                }
-//
-//                System.out.println("Row [1] added " + row);
-//                data.add(row);
-//            }
-//            tableData.setItems(data);
-//
-//        } catch (SQLException ex) {
-//            System.err.println(ex.getMessage());
-//        }
-//    }
-
 
     @FXML
     private void refreshTable() {
