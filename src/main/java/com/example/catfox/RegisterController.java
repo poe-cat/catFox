@@ -105,7 +105,7 @@ public class RegisterController implements Initializable {
 
             tableData.setItems(personObservableList);
 
-            //for searching database by keywords
+            // searching database by keywords
             FilteredList<Person> filteredList =
                     new FilteredList<>(personObservableList, b -> true);
 
@@ -119,13 +119,13 @@ public class RegisterController implements Initializable {
 
                     String searchKeyword = newValue.toLowerCase();
 
-                    if(person.getFirstname().toLowerCase().indexOf(searchKeyword) > -1) {
+                    if(person.getFirstname().toLowerCase().contains(searchKeyword)) {
                         return true;
-                    } else if(person.getLastname().toLowerCase().indexOf(searchKeyword) > -1) {
+                    } else if(person.getLastname().toLowerCase().contains(searchKeyword)) {
                         return true;
-                    }else if(person.getUsername().toLowerCase().indexOf(searchKeyword) > -1) {
+                    }else if(person.getUsername().toLowerCase().contains(searchKeyword)) {
                         return true;
-                    } else if(person.getPassword().toLowerCase().indexOf(searchKeyword) > -1) {
+                    } else if(person.getPassword().toLowerCase().contains(searchKeyword)) {
                         return true;
                     } else
                         return false;
@@ -146,7 +146,7 @@ public class RegisterController implements Initializable {
         }
     }
 
-
+//TODO: issue with incomplete registration
     public void registerButtonOnAction(ActionEvent event) {
 
         //check if both passwords are the same
