@@ -105,7 +105,6 @@ public class RegisterController implements Initializable {
 
             tableData.setItems(personObservableList);
 
-            // searching database by keywords
             FilteredList<Person> filteredList =
                     new FilteredList<>(personObservableList, b -> true);
 
@@ -140,38 +139,34 @@ public class RegisterController implements Initializable {
             tableData.setItems(sortedList);
 
 
-        } catch(SQLException e) {
+            } catch(SQLException e) {
             Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, e);
             e.printStackTrace();
+            }
         }
-    }
 
-//TODO: issue with incomplete registration
-    public void registerButtonOnAction(ActionEvent event) {
-
-        //check if both passwords are the same
+        public void registerButtonOnAction(ActionEvent event) {
         if(setpasswordField.getText().equals(confirmpasswordField.getText())) {
             registerUser();
             confirmPasswordLabel.setText("");
 
-        } else {
+            } else {
             confirmPasswordLabel.setText("Password doesn't match!");
-        }
+            }
 
-        //check if not empty
-        if (firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty()
+        if(firstNameTextField.getText().isEmpty() || lastNameTextField.getText().isEmpty()
                 || usernameTextField.getText().isEmpty() || setpasswordField.getText().isEmpty()
                 || confirmpasswordField.getText().isEmpty()) {
 
             registrationMessageLabel.setTextFill(Color.TOMATO);
             registrationMessageLabel.setText("Enter all details");
 
-        } else {
+            } else {
             registerUser();
+            }
         }
-    }
 
-    public void closeButtonOnAction(ActionEvent event) {
+        public void closeButtonOnAction(ActionEvent event) {
         Alert alert = new Alert (Alert.AlertType.CONFIRMATION,"", ButtonType.YES, ButtonType.NO);
         alert.setHeaderText("Are you sure you want to quit?");
         alert.showAndWait();
@@ -180,11 +175,11 @@ public class RegisterController implements Initializable {
             Stage stage = (Stage) closeButton.getScene().getWindow();
             stage.close();
             Platform.exit();
-        }
+            }
         else alert.close();
-    }
+        }
 
-    public void registerUser() {
+        public void registerUser() {
 
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
@@ -206,35 +201,34 @@ public class RegisterController implements Initializable {
             registrationMessageLabel.setText("User registered successfully!");
             refreshTable();
 
-        } catch(Exception e) {
+            } catch(Exception e) {
             e.printStackTrace();
             e.getCause();
+            }
         }
-    }
 
-    @FXML
-    private void refreshTable() {
-        try {
+        @FXML
+        private void refreshTable() {
+            try {
             personObservableList.clear();
 
             query = "SELECT * FROM `useraccount`";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
-                personObservableList.add(new Person(
+                while (resultSet.next()){
+                    personObservableList.add(new Person(
                         resultSet.getString("firstname"),
                         resultSet.getString("lastname"),
                         resultSet.getString("username"),
                         resultSet.getString("password")));
-                tableData.setItems(personObservableList);
+                    tableData.setItems(personObservableList);
 
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(RegisterController.class.getName()).log(Level.SEVERE, null, ex);
+                }
         }
-    }
 }
 
 

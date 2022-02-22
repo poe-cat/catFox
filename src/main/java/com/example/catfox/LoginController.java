@@ -22,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ResourceBundle;
 
+
 public class LoginController implements Initializable {
 
     @FXML
@@ -36,7 +37,6 @@ public class LoginController implements Initializable {
     private TextField usernameTextField;
     @FXML
     private PasswordField enterPasswordField;
-
 
 
     @Override
@@ -78,16 +78,13 @@ public class LoginController implements Initializable {
             Statement statement = connectDB.createStatement();
             ResultSet queryResult = statement.executeQuery(verifyLogin);
 
-
             while(queryResult.next()) {
                 if(queryResult.getInt(1) == 1) {
-                    //loginMessageLabel.setText("Congrats!");
                     createAccountForm();
                 } else {
                     loginMessageLabel.setText("Invalid login. Please try again");
                 }
             }
-
 
         } catch(Exception e) {
             e.printStackTrace();
@@ -110,5 +107,4 @@ public class LoginController implements Initializable {
             e.getCause();
         }
     }
-
 }
